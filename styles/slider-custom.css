@@ -1,0 +1,21 @@
+.slick-list {
+  margin: 0 -10px;
+}
+
+.slick-slide > div {
+  padding: 0 10px;
+}
+
+.slick-track {
+  display: flex;
+  align-items: stretch;
+}
+
+.slick-slide {
+  height: auto;
+}
+
+.slick-slide > div {
+  height: 100%;
+}
+

@@ -1,0 +1,43 @@
+.category {
+  margin-bottom: 40px;
+}
+
+.categoryTitle {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.sliderContainer {
+  margin: 0 -10px;
+}
+
+.slideItem {
+  padding: 0 10px;
+}
+
+.sliderContainer :global(.slick-list) {
+  overflow: visible;
+}
+
+.sliderContainer :global(.slick-track) {
+  display: flex;
+  align-items: stretch;
+}
+
+.sliderContainer :global(.slick-slide) {
+  height: auto;
+}
+
+.sliderContainer :global(.slick-slide > div) {
+  height: 100%;
+}
+
+.sliderContainer :global(.slick-list) {
+  cursor: grab;
+}
+
+.sliderContainer :global(.slick-list:active) {
+  cursor: grabbing;
+}
+
