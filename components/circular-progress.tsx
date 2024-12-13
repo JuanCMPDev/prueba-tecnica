@@ -6,18 +6,24 @@ interface CircularProgressProps {
 
 export function CircularProgress({
   percentage,
-  size = 200,         // Increased default size
-  strokeWidth = 10,   // Adjusted stroke width
+  size = 200,
+  strokeWidth = 10,
 }: CircularProgressProps) {
   const radius = (size - strokeWidth) / 2
   const circumference = radius * 2 * Math.PI
   const offset = circumference - ((percentage * 0.95) / 100) * circumference
 
+  const getColorClass = (percentage: number) => {
+    if (percentage >= 70) return 'stroke-green-500';
+    if (percentage >= 40) return 'stroke-yellow-500';
+    return 'stroke-red-500';
+  }
+
   return (
     <div className="relative" style={{ width: size, height: size }}>
       <svg className="w-full h-full" viewBox={`0 0 ${size} ${size}`}>
         <circle
-          className="text-green-900"
+          className="text-gray-200"
           strokeWidth={strokeWidth}
           stroke="currentColor"
           fill="transparent"
@@ -26,7 +32,7 @@ export function CircularProgress({
           cy={size / 2}
         />
         <circle
-          className="text-green-500"
+          className={getColorClass(percentage)}
           strokeWidth={strokeWidth}
           strokeDasharray={circumference}
           strokeDashoffset={offset}
@@ -40,7 +46,7 @@ export function CircularProgress({
         />
       </svg>
       <div
-        className="absolute inset-0 flex items-center justify-center text-white font-medium"
+        className="absolute inset-0 flex items-center justify-center font-medium text-white"
         style={{
           fontSize: `${size / 3.5}px`,
           lineHeight: 1

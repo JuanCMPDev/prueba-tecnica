@@ -6,6 +6,7 @@ import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 
 interface Movie {
+  id: number
   title: string
   image: string
 }
@@ -58,9 +59,9 @@ export function MovieCategory({ title, movies }: MovieCategoryProps) {
       <h2 className="text-2xl font-bold mb-4 text-white">{title}</h2>
       <div className="relative">
         <Slider {...settings}>
-          {movies.map((movie, index) => (
-            <div key={index} className="px-1.5 pb-4">
-              <SimpleMovieCard {...movie} />
+          {movies.map((movie) => (
+            <div key={movie.id} className="px-1.5 pb-4">
+              <SimpleMovieCard id={movie.id} image={movie.image} title={movie.title} />
             </div>
           ))}
         </Slider>
