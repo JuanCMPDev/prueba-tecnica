@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, Suspense } from 'react';
+import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Hero } from "@/components/hero";
 import { MovieSection } from "@/components/movie-section";
@@ -10,6 +10,8 @@ import { useLikeStore } from "@/store/likeStore";
 import { Movie, movieService } from "@/services/movieService";
 import { likeService } from "@/services/likeService";
 import { Loader } from "@/components/loader";
+
+export const dynamic = 'force-dynamic';
 
 export default function Home() {
   const [selectedGenreId, setSelectedGenreId] = useState<number | null>(null);
@@ -49,7 +51,7 @@ export default function Home() {
         if (showPopular) {
           const { results, total_pages } = await movieService.getPopularMovies(currentPage);
           setPopularMovies(results);
-          setTotalPages(total_pages); 
+          setTotalPages(total_pages);
         }
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -92,31 +94,29 @@ export default function Home() {
 
   return (
     <div className="flex flex-col min-h-screen bg-[#454545]">
-      <Suspense fallback={<Loader />}>
-        <Hero id={1011985} />
-        <div className="flex flex-1 overflow-hidden">
-          <Sidebar 
-            onGenreSelect={handleGenreSelect}
-            onSearch={handleSearch}
-            onFavoritesClick={handleFavoritesClick}
-            isAuthenticated={isAuthenticated}
+      <Hero id={1011985} />
+      <div className="flex flex-1 overflow-hidden">
+        <Sidebar
+          onGenreSelect={handleGenreSelect}
+          onSearch={handleSearch}
+          onFavoritesClick={handleFavoritesClick}
+          isAuthenticated={isAuthenticated}
+          showFavorites={showFavorites}
+        />
+        <div className="flex-1 overflow-y-auto">
+          <MovieSection
+            selectedGenreId={selectedGenreId}
+            searchQuery={searchQuery}
             showFavorites={showFavorites}
+            showPopular={showPopular}
+            favoriteMovies={favoriteMovies}
+            popularMovies={popularMovies}
+            totalPages={totalPages}
+            currentPage={currentPage}
+            onPageChange={handlePageChange}
           />
-          <div className="flex-1 overflow-y-auto">
-            <MovieSection 
-              selectedGenreId={selectedGenreId} 
-              searchQuery={searchQuery}
-              showFavorites={showFavorites}
-              showPopular={showPopular}
-              favoriteMovies={favoriteMovies}
-              popularMovies={popularMovies}
-              totalPages={totalPages}
-              currentPage={currentPage}
-              onPageChange={handlePageChange}
-            />
-          </div>
         </div>
-      </Suspense>
+      </div>
     </div>
   );
 }
