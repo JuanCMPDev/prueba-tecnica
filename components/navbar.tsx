@@ -65,7 +65,7 @@ export function NavBar() {
           <div className="flex-grow flex justify-center md:justify-start items-center">
             <Link href="/" className="flex-shrink-0">
               <Image 
-                src={'/assets/logo.png'} 
+                src={'/assets/Logo.png'} 
                 width={120}
                 height={40}
                 className="h-10 w-auto"
