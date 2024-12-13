@@ -17,7 +17,6 @@ export const HomeContent = () => {
   const [showPopular, setShowPopular] = useState(false);
   const [favoriteMovies, setFavoriteMovies] = useState<Movie[]>([]);
   const [popularMovies, setPopularMovies] = useState<Movie[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
   const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
   const { token, isAuthenticated } = useAuthStore();
@@ -33,7 +32,6 @@ export const HomeContent = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      setIsLoading(true);
       try {
         if (isAuthenticated && token) {
           const fetchedLikes = await likeService.fetchLikes(token);
@@ -52,8 +50,6 @@ export const HomeContent = () => {
         }
       } catch (error) {
         console.error('Error fetching data:', error);
-      } finally {
-        setIsLoading(false);
       }
     };
 
@@ -79,9 +75,6 @@ export const HomeContent = () => {
     setCurrentPage(page);
   };
 
-  if (isLoading) {
-    return <div>Cargando...</div>;
-  }
 
   return (
     <div className="flex flex-col min-h-screen bg-[#454545]">
