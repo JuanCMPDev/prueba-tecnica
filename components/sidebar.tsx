@@ -76,7 +76,7 @@ export function Sidebar({ onGenreSelect, onSearch }: SidebarProps) {
     <>
       <button
         onClick={toggleSidebar}
-        className={`md:hidden fixed top-4 left-4 z-50 bg-[#262626] p-2 rounded-md transition-opacity duration-300 ${
+        className={`md:hidden fixed top-4 left-4 z-40 bg-[#262626] p-2 rounded-md transition-opacity duration-300 ${
           isSidebarOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'
         }`}
         aria-label="Toggle sidebar"
@@ -85,7 +85,7 @@ export function Sidebar({ onGenreSelect, onSearch }: SidebarProps) {
       </button>
       <aside
         ref={sidebarRef}
-        className={`fixed md:sticky top-0 left-0 z-[60] w-64 bg-[#262626] min-h-screen overflow-y-auto transition-all duration-300 ease-in-out ${
+        className={`fixed md:sticky top-0 left-0 z-30 w-64 bg-[#262626] min-h-screen overflow-y-auto transition-all duration-300 ease-in-out ${
           isSidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
         } md:flex md:flex-col`}
       >
