@@ -60,12 +60,6 @@ export const HomeContent = () => {
     fetchData();
   }, [isAuthenticated, token, showFavorites, showPopular, currentPage, setLikes]);
 
-  const handleFavoritesClick = () => {
-    setShowFavorites(true);
-    setShowPopular(false);
-    setSelectedGenreId(null);
-    setSearchQuery("");
-  };
 
   const handleSearch = (query: string) => {
     setSearchQuery(query);
@@ -96,9 +90,6 @@ export const HomeContent = () => {
         <Sidebar
           onGenreSelect={handleGenreSelect}
           onSearch={handleSearch}
-          onFavoritesClick={handleFavoritesClick}
-          isAuthenticated={isAuthenticated}
-          showFavorites={showFavorites}
         />
         <div className="flex-1 overflow-y-auto">
           <MovieSection
